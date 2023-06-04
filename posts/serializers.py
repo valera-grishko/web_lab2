@@ -9,7 +9,10 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
+        if self.context.get('request', None):
+            validated_data['user'] = self.context['request'].user
+        if self.context.get('scope', None):
+            validated_data['user'] = self.context['scope']['user']
         return super().create(validated_data)
 
 
@@ -21,5 +24,8 @@ class MessageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
+        if self.context.get('request', None):
+            validated_data['user'] = self.context['request'].user
+        if self.context.get('scope', None):
+            validated_data['user'] = self.context['scope']['user']
         return super().create(validated_data)

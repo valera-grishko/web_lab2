@@ -10,15 +10,15 @@ admin.site.unregister(Group)
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('email', 'is_staff', 'is_active')
-    list_filter = ('is_staff', 'is_active')
+    list_display = ('email', 'status', 'is_staff', 'is_active')
+    list_filter = ('is_staff', 'is_active', 'status')
     search_fields = ('email',)
     ordering = ('email',)
     icon_name = 'people'
     fieldsets = (
         ('Особиста інформація',
          {'fields': (
-             'email', 'first_name', 'gender', 'birth_date', 'password')}),
+             'email', 'first_name', 'gender', 'birth_date', 'password', 'status')}),
         ('Дозволи', {'fields': ('is_staff', 'is_active', 'is_superuser')}),
     )
     add_fieldsets = (

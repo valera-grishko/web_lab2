@@ -26,10 +26,16 @@ class CustomUser(AbstractUser):
         ('Female', 'Female'),
     )
 
+    STATUS_CHOICES = (
+        (False, 'Offline'),
+        (True, 'Online'),
+    )
+
     username = None
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, null=True, verbose_name='Стать')
     birth_date = models.DateField(blank=True, null=True, verbose_name='Дата народження')
+    status = models.BooleanField(choices=STATUS_CHOICES, default=False, verbose_name='Статус')
 
     objects = CustomUserManager()
 
